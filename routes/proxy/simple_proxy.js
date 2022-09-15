@@ -1,4 +1,5 @@
 const express = require('express');
+const request = require('request');
 const winston = require('winston');
 
 const router = express.Router();
@@ -13,7 +14,7 @@ const logger = winston.createLogger({
     ]
 })
 
-router.use((req, res) => {
+router.all("/api/*", (req, res) => {
     const today = new Date();
     const YYYY = today.getFullYear();
     const MM = String(today.getMonth() + 1).padStart(2, '0');
@@ -22,9 +23,12 @@ router.use((req, res) => {
     const mm = String(today.getMinutes()).padStart(2, '0');
     const ss = String(today.getSeconds()).padStart(2, '0');
 
+    req.url = req.url.split('/').slice(2).join('/');
+
     logger.info("[" + YYYY + '-' + MM + '-' + DD + ' ' + hh + ':' + mm + ":" + ss + '] ' +
-        req.socket.remoteAddress + " " + req.method + " " + req.path);
-    return res.status(200).send(req.path);
+        req.socket.remoteAddress + " " + req.method + " " + req.url);
+
+    request(req.url).pipe(res);
 });
 
 module.exports = router;
