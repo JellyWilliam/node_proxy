@@ -1,0 +1,3 @@
+{"level":"info","message":"[2022-09-15 14:26:30] ::ffff:127.0.0.1 POST /https://inventos.ru/","service":"proxy"}
+{"level":"info","message":"[2022-09-15 14:26:52] ::ffff:127.0.0.1 GET /https://www.google.ru/","service":"proxy"}
+{"level":"info","message":"[2022-09-15 14:39:00] ::ffff:127.0.0.1 GET /https://www.google.ru/","service":"proxy"}
